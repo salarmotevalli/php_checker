@@ -1,0 +1,33 @@
+{
+    "name": "salarmotevalli/php_helper",
+    "description": "library for optimiz php code",
+    "type": "library",
+    "keywords": [
+        "fixer",
+        "optimize",
+        "style"
+    ],
+    
+    "autoload": {
+        "psr-4": {
+            "Salarmotevalli\\PhpHelper\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "salar motevalli",
+            "email": "salar.mo.ro@gmail.com"
+        }
+    ],
+    "bin": [
+        "bin/.php"
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "friendsofphp/php-cs-fixer": "^3.8"
+    },
+    "scripts": {
+        "fix": "php-cs-fixer fix",
+        "test": "phpunit ./test --colors" 
+    }
+}
