@@ -1,5 +1,5 @@
 {
-    "name": "salarmotevalli/php_helper",
+    "name": "salarmotevalli/php_checker",
     "description": "library for optimiz php code",
     "type": "library",
     "keywords": [
@@ -7,10 +7,9 @@
         "optimize",
         "style"
     ],
-    
     "autoload": {
         "psr-4": {
-            "Salarmotevalli\\PhpHelper\\": "src/"
+            "Salarmotevalli\\PhpChecker\\": "src/"
         }
     },
     "authors": [
@@ -24,10 +23,15 @@
     ],
     "require-dev": {
         "phpunit/phpunit": "^9.5",
-        "friendsofphp/php-cs-fixer": "^3.8"
+        "friendsofphp/php-cs-fixer": "^3.8",
+        "ergebnis/php-cs-fixer-config": "^4.4"
     },
     "scripts": {
         "fix": "php-cs-fixer fix",
-        "test": "phpunit ./test --colors" 
+        "test": "phpunit ./test --colors",
+        "coding-standards": [
+            "mkdir -p .build/php-cs-fixer",
+            "php-cs-fixer fix --diff --verbose"
+        ]
     }
 }
