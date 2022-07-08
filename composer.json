@@ -1,6 +1,6 @@
 {
     "name": "salarmotevalli/php_checker",
-    "description": "library for optimiz php code",
+    "description": "library for optimizing php code",
     "type": "library",
     "keywords": [
         "fixer",
@@ -19,7 +19,7 @@
         }
     ],
     "bin": [
-        "bin/.php"
+        "bin/check.php"
     ],
     "require-dev": {
         "phpunit/phpunit": "^9.5",
@@ -27,7 +27,6 @@
         "ergebnis/php-cs-fixer-config": "^4.4"
     },
     "scripts": {
-        "fix": "php-cs-fixer fix",
         "test": "phpunit ./test --colors",
         "coding-standards": [
             "mkdir -p .build/php-cs-fixer",

@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/../src/Kernel.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+
+require_once __DIR__ . '/../src/Classes/Kernel.php';
 
 require_once __DIR__ . '/../route.php';
-$kernel = new \Salarmotevalli\PhpChecker\Kernel($argc, $argv);
-set_route($kernel);
-$kernel->run();
+// $kernel = new Kernel($argc, $argv);
+// set_route($kernel);
+$r = new \Salarmotevalli\PhpChecker\Classes\Kernel($argc, $argv);
+// $r->run();
