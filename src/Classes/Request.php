@@ -24,4 +24,28 @@ final class Request
     {
         return $this->argv[2] ?? null;
     }
+
+    public function getOptionKeyValue(): array
+    {
+        if (1 < $this->argc) {
+            $option = \explode(':', $this->getOption());
+        }
+
+        return [
+            'key' => $option[0],
+            'value' => $option[1],
+        ];
+    }
+
+    public function getFlagKeyValue(): array
+    {
+        if (2 < $this->argc) {
+            $flag = \explode(':', $this->getFlag());
+        }
+
+        return [
+            'key' => $flag[0],
+            'value' => $flag[1],
+        ];
+    }
 }
