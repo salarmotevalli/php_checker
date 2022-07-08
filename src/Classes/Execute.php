@@ -5,24 +5,24 @@ declare(strict_types=1);
 namespace Salarmotevalli\PhpChecker\Classes;
 
 use Salarmotevalli\PhpChecker\Commands\Main;
-use function Salarmotevalli\PhpChecker\commands;
+require_once __DIR__ . '/../CommandRegister.php';
 
 final class Execute
 {
-    private static ?array $command;
+    private static ?array $commands;
     private static ?Request $request;
 
     public static function execute($request): void
     {
         self::$request = $request;
         self::setCommands();
-        $class= self::getCommandClass();
+        $class = self::getCommandClass();
         self::executer($class);
     }
 
     private static function setCommands(): void
     {
-        self::$command = commands();
+        self::$commands = commands();
     }
 
     private static function getCommandClass()
@@ -38,10 +38,9 @@ final class Execute
 //        }
     }
 
-    private static function executer(string $class)
+    private static function executer(string $class): void
     {
-        $command= new $class;
+        $command = new $class();
         $command->run();
-
     }
 }

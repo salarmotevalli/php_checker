@@ -1,11 +1,7 @@
 <?php
 
 declare(strict_types=1);
-namespace Salarmotevalli\PhpChecker;
 
-/**
- * @return array
- */
 function commands(): array
 {
     return [

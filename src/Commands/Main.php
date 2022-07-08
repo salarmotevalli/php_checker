@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Salarmotevalli\PhpChecker\Commands;
 
-class Main
-{
+use Salarmotevalli\PhpChecker\Implementation\CommandAbstract;
 
+final class Main extends CommandAbstract
+{
 }
