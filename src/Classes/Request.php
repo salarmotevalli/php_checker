@@ -32,20 +32,25 @@ final class Request
         }
 
         return [
-            'key' => $option[0],
-            'value' => $option[1],
+            'key' => $option[0] ?? null,
+            'value' => $option[1] ?? null,
         ];
     }
 
     public function getFlagKeyValue(): array
     {
         if (2 < $this->argc) {
-            $flag = \explode(':', $this->getFlag());
+            $flag = \explode('=', $this->getFlag());
         }
 
         return [
             'key' => $flag[0],
             'value' => $flag[1],
         ];
+    }
+
+    public function getCommandLength()
+    {
+        return $this->argc;
     }
 }

@@ -13,6 +13,10 @@ final class Kernel
     {
         self::$kernel = $this;
         $this->request = new Request($argc, $argv);
-        \print_r($this->request->getOptionKeyValue());
+    }
+
+    public function run(): void
+    {
+        Execute::execute($this->request);
     }
 }
