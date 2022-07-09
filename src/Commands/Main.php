@@ -36,9 +36,18 @@ final class Main extends CommandAbstract
             \print_r(value: "    {$parent}:" . \PHP_EOL);
 
             foreach ($subs as $sub => $class) {
-                \print_r(value: "      {$sub}");
-                \print_r("...........{$class::description()}" . \PHP_EOL);
+                \print_r(value: "      {$sub}" . $this->dot($sub));
+                \print_r("{$class::description()}" . \PHP_EOL);
             }
         }
+    }
+
+    private function dot($sub)
+    {
+        $dot = ' ';
+        $count = 20 - \mb_strlen($sub);
+        $dot .= \str_repeat('.', $count + 1);
+
+        return $dot;
     }
 }
