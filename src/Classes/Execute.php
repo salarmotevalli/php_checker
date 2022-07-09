@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Salarmotevalli\PhpChecker\Classes;
 
 use Salarmotevalli\PhpChecker\Commands\Main;
+
 require_once __DIR__ . '/../CommandRegister.php';
 
 final class Execute
@@ -32,10 +33,12 @@ final class Execute
         if (1 === $length) {
             return Main::class;
         }
-//
-//        if ($length > 1){
-//            self::$request->getOptionKeyValue()
-//        }
+
+        if (1 < $length) {
+            $option = self::$request->getOptionKeyValue();
+            return self::$commands[$option['key']][$option['value']];
+        }
+
     }
 
     private static function executer(string $class): void
