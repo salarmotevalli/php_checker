@@ -14,14 +14,13 @@ abstract class CommandAbstract implements CommandInterface
 
     final public function welcom(): string
     {
-        return 'welcome to php ckecker...' . \PHP_EOL
-            . '_______________________' . \PHP_EOL
-            . '  ___________________' . \PHP_EOL
-            . '    _______________' . \PHP_EOL
-            . '      ___________' . \PHP_EOL
-            . '        _______';
+        return
+              '___________________________' . \PHP_EOL
+            . ' welcome to php ckecker...' . \PHP_EOL
+            . '___________________________' . \PHP_EOL
+            . '      salar motevalli' . \PHP_EOL
+            . '    ___________________' . \PHP_EOL;
     }
-
 
     abstract public function main();
 }

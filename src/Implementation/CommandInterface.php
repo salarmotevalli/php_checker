@@ -7,5 +7,8 @@ namespace Salarmotevalli\PhpChecker\Implementation;
 interface CommandInterface
 {
     public function run(): void;
+
     public function welcom(): string;
+
+    public static function description(): string;
 }

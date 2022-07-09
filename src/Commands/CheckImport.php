@@ -10,16 +10,10 @@ final class CheckImport extends CommandAbstract
 {
     public function main(): void
     {
-        \print_r(value: $this->usage());
     }
 
-    private function usage(): string
+    public static function description(): string
     {
-        return 'USAGE => /vendor/bin/check <optin> [flag]';
-    }
-
-    private function commands(): string
-    {
-        return 'h';
+        return 'check the class imports';
     }
 }

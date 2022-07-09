@@ -36,9 +36,9 @@ final class Execute
 
         if (1 < $length) {
             $option = self::$request->getOptionKeyValue();
+
             return self::$commands[$option['key']][$option['value']];
         }
-
     }
 
     private static function executer(string $class): void
