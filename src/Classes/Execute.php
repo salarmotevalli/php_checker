@@ -37,7 +37,19 @@ final class Execute
         if (1 < $length) {
             $option = self::$request->getOptionKeyValue();
 
-            return self::$commands[$option['key']][$option['value']];
+            try {
+                $command = self::$commands[$option['key']][$option['value']] ?? null;
+
+                if (null === $command) {
+                    throw new \Exception('command not found' . \PHP_EOL);
+                }
+
+                return $command;
+            } catch (\Exception $e) {
+                echo $e->getMessage();
+
+                return Main::class;
+            }
         }
     }
 
