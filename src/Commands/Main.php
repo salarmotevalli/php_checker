@@ -23,21 +23,22 @@ final class Main extends CommandAbstract
 
     private function usage(): void
     {
-        \print_r(value: 'USAGE => /vendor/bin/check <optin> [flag]' . \PHP_EOL);
-        \print_r(value: 'example => /vendor/bin/check check:import --file=app/http/controller/UserControler.php' . \PHP_EOL);
+        \print_r(value: "USAGE => \033[36m/vendor/bin/check \033[33m<optin> \033[31m[flag]\033[0m" . \PHP_EOL);
+        \print_r(value: "example => \033[36m/vendor/bin/check \033[33mcheck:\033[35mimport \033[31m--file=app/http/controller/UserControler.php" . \PHP_EOL);
     }
 
     private function commands(): void
     {
         $commands = commands();
-        \print_r('  <option>:' . \PHP_EOL);
+        echo "  \033[32m <option>:" . \PHP_EOL;
 
         foreach ($commands as $parent => $subs) {
-            \print_r(value: "    {$parent}:" . \PHP_EOL);
+            echo "    \033[33m {$parent}:" . \PHP_EOL;
 
             foreach ($subs as $sub => $class) {
-                \print_r(value: "      {$sub}" . $this->dot($sub));
-                \print_r("{$class::description()}" . \PHP_EOL);
+                echo "      \033[35m {$sub} \033[0m" . $this->dot($sub);
+                echo "  {$class::description()}" . \PHP_EOL;
+//                echo " some colored text \ some white text \n";
             }
         }
     }
