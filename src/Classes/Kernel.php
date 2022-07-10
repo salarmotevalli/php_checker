@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace Salarmotevalli\PhpChecker\Classes;
+require_once __DIR__ . '/../CommandRegister.php';
 
 final class Kernel
 {
@@ -17,6 +18,7 @@ final class Kernel
 
     public function run(): void
     {
-        Execute::execute($this->request);
+        $commands= commands();
+        Execute::execute($this->request, $commands);
     }
 }

@@ -5,33 +5,37 @@ declare(strict_types=1);
 namespace Salarmotevalli\PhpChecker\Classes;
 
 use Salarmotevalli\PhpChecker\Commands\Main;
-
-require_once __DIR__ . '/../CommandRegister.php';
+use Salarmotevalli\PhpChecker\Implementation\CommandInterface;
 
 final class Execute
 {
     private static ?array $commands;
     private static ?Request $request;
 
-    public static function execute($request): void
+    public static function execute($request, $commands): void
     {
         self::$request = $request;
-        self::setCommands();
+        self::setCommands($commands);
         $class = self::getCommandClass();
         self::executer($class);
     }
 
-    private static function setCommands(): void
+    public static function getCommands(): ?array
     {
-        self::$commands = commands();
+        return self::$commands;
     }
 
-    private static function getCommandClass()
+    private static function setCommands($commands): void
+    {
+        self::$commands = $commands;
+    }
+
+    private static function getCommandClass(): ?CommandInterface
     {
         $length = self::$request->getCommandLength();
 
         if (1 === $length) {
-            return Main::class;
+            return new Main(self::$commands);
         }
 
         if (1 < $length) {
@@ -44,18 +48,17 @@ final class Execute
                     throw new \Exception('command not found' . \PHP_EOL);
                 }
 
-                return $command;
+                return new $command();
             } catch (\Exception $e) {
                 echo $e->getMessage();
 
-                return Main::class;
+                return new Main(self::$commands);
             }
         }
     }
 
-    private static function executer(string $class): void
+    private static function executer(CommandInterface $command): void
     {
-        $command = new $class();
         $command->run();
     }
 }
