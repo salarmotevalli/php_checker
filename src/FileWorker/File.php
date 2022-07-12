@@ -22,7 +22,9 @@ final class File
 
         while (!\feof($this->opened_file)) {
             $line = \fgets($this->opened_file);
-
+            if (\is_bool($line)) {
+                continue;
+            }
             if (\str_contains($line, $string)) {
                 $stringLines[] = $i;
             }
