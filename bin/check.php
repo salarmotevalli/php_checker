@@ -9,4 +9,4 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $filename = './read.txt';
 
 $file = new \Salarmotevalli\PhpChecker\FileWorker\File($filename);
-$file->isThere();
+var_dump($file->isThere());

@@ -14,33 +14,39 @@ final class File
         $this->file_name = $path;
     }
 
-    public function isThere(string $string = 'die'): void
+    public function isThere(string $string = 'die'): false|array
     {
-        $this->opened_file = $this->openForRead();
-        $lines = [];
+        $this->openFileForRead();
+        $stringLines = [];
+        $i = 1;
 
         while (!\feof($this->opened_file)) {
-//            if (\str_contains(\fgets($this->opened_file), $string)) {
-//                echo "The string 'lazy' was found in the string\n";
-//            }
-            $lines[] = \fgets($this->opened_file);
+            $line = \fgets($this->opened_file);
+
+            if (\str_contains($line, $string)) {
+                $stringLines[] = $i;
+            }
+            ++$i;
+        }
+        $this->closeFile();
+
+        if (empty($stringLines)) {
+            return false;
         }
 
-        \print_r($lines);
-
-        $this->closeFile();
+        return $stringLines;
     }
 
-    private function openForRead()
+    private function openFileForRead(): void
     {
-        return \fopen($this->file_name, 'rb');
+        $this->opened_file = \fopen($this->file_name, 'rb');
     }
 
-    private function openForUpdate(): bool
+    private function openForUpdate(): void
     {
     }
 
-    private function openForCreate(): bool
+    private function openForCreate(): void
     {
     }
 
