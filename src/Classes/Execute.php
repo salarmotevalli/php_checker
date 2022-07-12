@@ -12,7 +12,7 @@ final class Execute
     private static ?array $commands;
     private static ?Request $request;
 
-    public static function execute($request, $commands): void
+    public static function execute(Request $request, $commands): void
     {
         self::$request = $request;
         self::setCommands($commands);

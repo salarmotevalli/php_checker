@@ -10,7 +10,7 @@ final class CheckDD extends CommandAbstract
 {
     public function main(): void
     {
-        // TODO: Implement main() method.
+
     }
 
     public static function description(): string

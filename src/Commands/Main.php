@@ -25,13 +25,13 @@ final class Main extends CommandAbstract
 
     public static function description(): string
     {
-        return 'check the class imports';
+        return 'check.php the class imports';
     }
 
     private function usage(): void
     {
-        \print_r(value: "USAGE => \033[36m/vendor/bin/check \033[33m<optin> \033[31m[flag]\033[0m" . \PHP_EOL);
-        \print_r(value: "example => \033[36m/vendor/bin/check \033[33mcheck:\033[35mimport \033[31m--file=app/http/controller/UserControler.php" . \PHP_EOL . \PHP_EOL);
+        \print_r(value: "USAGE => \033[36m/vendor/bin/check.php \033[33m<optin> \033[31m[flag]\033[0m" . \PHP_EOL);
+        \print_r(value: "example => \033[36m/vendor/bin/check.php \033[33mcheck:\033[35mimport \033[31m--file=app/http/controller/UserControler.php" . \PHP_EOL . \PHP_EOL);
     }
 
     private function commands(): void
