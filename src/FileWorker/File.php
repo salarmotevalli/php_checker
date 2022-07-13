@@ -7,6 +7,7 @@ namespace Salarmotevalli\PhpChecker\FileWorker;
 final class File
 {
     private string $file_name;
+
     private $opened_file;
 
     public function __construct($path)
@@ -20,11 +21,13 @@ final class File
         $stringLines = [];
         $i = 1;
 
-        while (!\feof($this->opened_file)) {
+        while (! \feof($this->opened_file)) {
             $line = \fgets($this->opened_file);
+
             if (\is_bool($line)) {
                 continue;
             }
+
             if (\str_contains($line, $string)) {
                 $stringLines[] = $i;
             }

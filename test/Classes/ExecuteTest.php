@@ -21,8 +21,7 @@ final class ExecuteTest extends TestCase
         self::assertTrue(\method_exists(Execute::class, 'execute'));
     }
 
-    public function test_method_is_worked()
+    public function testMethodIsWorked(): void
     {
-
     }
 }

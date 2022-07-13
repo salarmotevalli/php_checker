@@ -10,6 +10,7 @@ use Salarmotevalli\PhpChecker\Implementation\CommandInterface;
 final class Execute
 {
     private static ?array $commands;
+
     private static ?Request $request;
 
     public static function execute(Request $request, $commands): void
@@ -34,17 +35,17 @@ final class Execute
     {
         $length = self::$request->getCommandLength();
 
-        if (1 === $length) {
+        if ($length === 1) {
             return new Main(self::$commands);
         }
 
-        if (1 < $length) {
+        if ($length > 1) {
             $option = self::$request->getOptionKeyValue();
 
             try {
                 $command = self::$commands[$option['key']][$option['value']] ?? null;
 
-                if (null === $command) {
+                if ($command === null) {
                     throw new \Exception('command not found' . \PHP_EOL);
                 }
 

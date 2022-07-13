@@ -1,12 +1,19 @@
-<?php
+<?php declare(strict_types=1);
 
-use Ergebnis\PhpCsFixer\Config;
+$finder = PhpCsFixer\Finder::create()
+    ->notPath('vendor')
+    ->in(__DIR__)
+    ->name('*.php')
+    ->ignoreDotFiles(true)
+    ->ignoreVCS(true);
 
-$config = Config\Factory::fromRuleSet(new Config\RuleSet\Php81(), [
-    'simplified_if_return' => true,
+return \MLL\PhpCsFixerConfig\risky($finder, [
+    'no_superfluous_phpdoc_tags' => [
+        'allow_mixed' => true,
+    ],
+    'yoda_style' => [
+        'equal' => false,
+        'identical' => false,
+        'less_and_greater' => false,
+    ],
 ]);
-
-$config->getFinder()->in(__DIR__);
-$config->setCacheFile(__DIR__ . '/.build/php-cs-fixer/.php-cs-fixer.cache');
-
-return $config;

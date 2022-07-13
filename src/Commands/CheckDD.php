@@ -10,7 +10,6 @@ final class CheckDD extends CommandAbstract
 {
     public function main(): void
     {
-
     }
 
     public static function description(): string

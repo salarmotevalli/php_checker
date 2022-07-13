@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dcfe1afaff37f2c201aa2a0ae7ad6491",
+    "content-hash": "8a2310953d47581d4707bdd4e2d812a3",
     "packages": [],
     "packages-dev": [
         {
@@ -445,81 +445,17 @@
             "time": "2022-02-28T11:07:21+00:00"
         },
         {
-            "name": "ergebnis/php-cs-fixer-config",
-            "version": "4.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ergebnis/php-cs-fixer-config.git",
-                "reference": "5b387005c049463d5f1ae8884fbd106f225cab69"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/php-cs-fixer-config/zipball/5b387005c049463d5f1ae8884fbd106f225cab69",
-                "reference": "5b387005c049463d5f1ae8884fbd106f225cab69",
-                "shasum": ""
-            },
-            "require": {
-                "ext-filter": "*",
-                "friendsofphp/php-cs-fixer": "~3.8.0",
-                "php": "^7.4 || ^8.0"
-            },
-            "require-dev": {
-                "ergebnis/composer-normalize": "^2.24.0",
-                "ergebnis/license": "^1.2.0",
-                "fakerphp/faker": "^1.19.0",
-                "phpunit/phpunit": "^9.5.19",
-                "psalm/plugin-phpunit": "~0.16.1",
-                "symfony/filesystem": "^4.4.0 || ^5.0.0",
-                "vimeo/psalm": "^4.22"
-            },
-            "type": "library",
-            "extra": {
-                "composer-normalize": {
-                    "indent-size": 2,
-                    "indent-style": "space"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Ergebnis\\PhpCsFixer\\Config\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Andreas Möller",
-                    "email": "am@localheinz.com"
-                }
-            ],
-            "description": "Provides a configuration factory and multiple rule sets for friendsofphp/php-cs-fixer.",
-            "homepage": "https://github.com/ergebnis/php-cs-fixer-config",
-            "support": {
-                "issues": "https://github.com/ergebnis/php-cs-fixer-config/issues",
-                "source": "https://github.com/ergebnis/php-cs-fixer-config"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/localheinz",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-03-19T10:37:52+00:00"
-        },
-        {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.8.0",
+            "version": "v3.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "cbad1115aac4b5c3c5540e7210d3c9fba2f81fa3"
+                "reference": "9b23c42f4d063f9e3aad823500e0940348b5ed63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/cbad1115aac4b5c3c5540e7210d3c9fba2f81fa3",
-                "reference": "cbad1115aac4b5c3c5540e7210d3c9fba2f81fa3",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/9b23c42f4d063f9e3aad823500e0940348b5ed63",
+                "reference": "9b23c42f4d063f9e3aad823500e0940348b5ed63",
                 "shasum": ""
             },
             "require": {
@@ -587,7 +523,7 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/issues",
-                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v3.8.0"
+                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v3.9.2"
             },
             "funding": [
                 {
@@ -595,7 +531,58 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-03-18T17:20:59+00:00"
+            "time": "2022-07-11T17:53:00+00:00"
+        },
+        {
+            "name": "mll-lab/php-cs-fixer-config",
+            "version": "v4.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mll-lab/php-cs-fixer-config.git",
+                "reference": "4f9bca3cabbd0c58f0aba03c7a683a75723065c7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mll-lab/php-cs-fixer-config/zipball/4f9bca3cabbd0c58f0aba03c7a683a75723065c7",
+                "reference": "4f9bca3cabbd0c58f0aba03c7a683a75723065c7",
+                "shasum": ""
+            },
+            "require": {
+                "friendsofphp/php-cs-fixer": "^3",
+                "php": "^7.2 || ^8"
+            },
+            "require-dev": {
+                "ergebnis/composer-normalize": "^2.13"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "config.php"
+                ],
+                "psr-4": {
+                    "MLL\\PhpCsFixerConfig\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Benedikt Franke",
+                    "email": "benedikt@franke.tech"
+                }
+            ],
+            "description": "Shared rules for php-cs-fixer",
+            "keywords": [
+                "php",
+                "php-cs-fixer"
+            ],
+            "support": {
+                "issues": "https://github.com/mll-lab/php-cs-fixer-config/issues",
+                "source": "https://github.com/mll-lab/php-cs-fixer-config/tree/v4.4.1"
+            },
+            "time": "2021-12-05T21:27:46+00:00"
         },
         {
             "name": "myclabs/deep-copy",

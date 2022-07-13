@@ -29,13 +29,10 @@
     "require-dev": {
         "phpunit/phpunit": "^9.5",
         "friendsofphp/php-cs-fixer": "^3.8",
-        "ergebnis/php-cs-fixer-config": "^4.4"
+        "mll-lab/php-cs-fixer-config": "^4.4"
     },
     "scripts": {
         "test": "phpunit ./test --colors",
-        "coding-standards": [
-            "mkdir -p .build/php-cs-fixer",
-            "php-cs-fixer fix --diff --verbose"
-        ]
+        "fix": "php-cs-fixer fix --diff --verbose"
     }
 }

@@ -7,6 +7,7 @@ namespace Salarmotevalli\PhpChecker\Classes;
 final class Request
 {
     private int $argc;
+
     private array $argv;
 
     public function __construct($argc, $argv)
@@ -27,7 +28,7 @@ final class Request
 
     public function getOptionKeyValue(): array
     {
-        if (1 < $this->argc) {
+        if ($this->argc > 1) {
             $option = \explode(':', $this->getOption());
         }
 
@@ -39,7 +40,7 @@ final class Request
 
     public function getFlagKeyValue(): array
     {
-        if (2 < $this->argc) {
+        if ($this->argc > 2) {
             $flag = \explode('=', $this->getFlag());
         }
 
