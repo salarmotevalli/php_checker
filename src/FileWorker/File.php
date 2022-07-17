@@ -15,36 +15,60 @@ final class File
         $this->file_name = $path;
     }
 
-    public function isThere(string $string = 'die'): false|array
+
+    public function isThere(string $string): false|array
     {
         $this->openFileForRead();
-        $stringLines = [];
+        $errLines = [];
         $i = 1;
 
         while (! \feof($this->opened_file)) {
             $line = \fgets($this->opened_file);
-
             if (\is_bool($line)) {
                 continue;
             }
-
             if (\str_contains($line, $string)) {
-                $stringLines[] = $i;
+                $errLines[] = $i;
             }
             ++$i;
         }
         $this->closeFile();
 
-        if (empty($stringLines)) {
+        if (empty($errLines)) {
             return false;
         }
 
-        return $stringLines;
+        return $errLines;
     }
 
     private function openFileForRead(): void
     {
         $this->opened_file = \fopen($this->file_name, 'rb');
+    }
+
+    public function namespaces(): array|false
+    {
+        $this->openFileForRead();
+        $namespaces = [];
+        $namespace = 'use' . ' ' . '((?:\\{1,2}\w+|\w+\\{1,2})(?:\w+\\{0,2})+)' . ';';
+        $i = 1;
+        while (! \feof($this->opened_file)) {
+            $line = \fgets($this->opened_file);
+            if (\is_bool($line)) {
+                continue;
+            }
+            if (\str_contains($line, $namespace)) {
+                $errLines[] = $i;
+            }
+            ++$i;
+        }
+        $this->closeFile();
+
+        if (empty($errLines)) {
+            return false;
+        }
+
+        return $errLines;
     }
 
     private function openForUpdate(): void
