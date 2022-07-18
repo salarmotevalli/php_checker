@@ -34,5 +34,7 @@ final class RequestTest extends TestCase
         self::assertEquals('check.php:import', $request1->getOption());
         self::assertEquals(['key' => 'check.php', 'value' => 'import'], $request1->getOptionKeyValue());
         self::assertEquals($argc, $request1->getCommandLength());
+        self::assertStringNotContainsString(':', $request1->getOptionKeyValue()['key']);
+        $this->assertStringNotContainsString(':', $request1->getOptionKeyValue()['value']);
     }
 }

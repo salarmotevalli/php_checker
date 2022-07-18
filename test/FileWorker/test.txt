@@ -1,0 +1,15 @@
+<?php declare(strict_types=1);
+
+use App\Model\User;
+use App\Model\Company;
+use App\Model\Comment;
+use App\Controller\User;
+use App\Http;
+
+class hello
+{
+    public function check(): void
+    {
+        var_dump(true);
+    }
+}

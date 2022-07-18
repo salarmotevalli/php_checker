@@ -2,7 +2,6 @@
 
 namespace Salarmotevalli\PhpChecker\FileWorker;
 
-// '((?:\\{1,2}\w+|\w+\\{1,2})(?:\w+\\{0,2})+)'
 class ImportedClass extends AbstractFile
 {
     public function allImports(): false|array

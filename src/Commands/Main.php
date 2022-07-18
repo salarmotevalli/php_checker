@@ -50,7 +50,7 @@ final class Main extends CommandAbstract
         }
     }
 
-    private function dot($sub)
+    private function dot($sub): string
     {
         $dot = ' ';
         $count = 20 - \mb_strlen($sub);

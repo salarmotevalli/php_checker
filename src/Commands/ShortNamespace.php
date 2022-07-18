@@ -13,10 +13,9 @@ class ShortNamespace extends CommandAbstract
         $file = new ImportedClass('read.php');
         // get namespaces
         $namespaces = $file->allImports();
-        var_dump($namespaces);
         // find equal namespace
-        if ($namespaces) {
-
+        if (! $namespaces) {
+            echo "\033[31m**/\033[0m there is not any namespace of classes in the file \033[31m/**\033[0m" . PHP_EOL;
         }
         // change with short form
         // replace in file
