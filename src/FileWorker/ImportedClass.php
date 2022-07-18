@@ -19,7 +19,6 @@ class ImportedClass extends AbstractFile
                 $namespaces[] = $matches[0];
             }
         }
-
         $this->closeFile();
         if (empty($namespaces)) {
             return false;

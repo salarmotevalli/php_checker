@@ -11,11 +11,13 @@ class ShortNamespace extends CommandAbstract
     {
         // open
         $file = new ImportedClass('read.php');
-//        $file->allImports();
+        // get namespaces
         $namespaces = $file->allImports();
         var_dump($namespaces);
-        // get namespaces
         // find equal namespace
+        if ($namespaces) {
+
+        }
         // change with short form
         // replace in file
         // done
