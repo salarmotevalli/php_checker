@@ -2,7 +2,7 @@
 
 namespace Salarmotevalli\PhpChecker\Commands;
 
-use Salarmotevalli\PhpChecker\FileWorker\File;
+use Salarmotevalli\PhpChecker\FileWorker\ImportedClass;
 use Salarmotevalli\PhpChecker\Implementation\CommandAbstract;
 
 class ShortNamespace extends CommandAbstract
@@ -10,8 +10,10 @@ class ShortNamespace extends CommandAbstract
     public function main()
     {
         // open
-        $file = new File('read.php');
-        $namespaces = $file->namespaces();
+        $file = new ImportedClass('read.php');
+//        $file->allImports();
+        $namespaces = $file->allImports();
+        var_dump($namespaces);
         // get namespaces
         // find equal namespace
         // change with short form

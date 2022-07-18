@@ -4,29 +4,29 @@ namespace Salarmotevalli\PhpChecker\FileWorker;
 
 abstract class AbstractFile
 {
-    private string $file_name;
+    protected string $file_name;
 
-    private $opened_file;
+    protected $opened_file;
 
     public function __construct($path)
     {
         $this->file_name = $path;
     }
 
-    private function openFileForRead(): void
+    protected function openFileForRead(): void
     {
         $this->opened_file = \fopen($this->file_name, 'rb');
     }
 
-    private function openForUpdate(): void
+    protected function openForUpdate(): void
     {
     }
 
-    private function openForCreate(): void
+    protected function openForCreate(): void
     {
     }
 
-    private function closeFile(): void
+    protected function closeFile(): void
     {
         \fclose($this->opened_file);
     }
