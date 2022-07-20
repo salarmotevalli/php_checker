@@ -6,7 +6,7 @@ abstract class AbstractFile
 {
     protected string $file_name;
 
-    protected $opened_file;
+    protected mixed $opened_file;
 
     public function __construct($path)
     {
@@ -30,4 +30,6 @@ abstract class AbstractFile
     {
         \fclose($this->opened_file);
     }
+
+//    public function content(): s
 }

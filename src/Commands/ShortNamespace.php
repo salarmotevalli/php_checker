@@ -18,9 +18,7 @@ class ShortNamespace extends CommandAbstract
             echo "\033[31m**/\033[0m there is not any namespace of classes in the file \033[31m/**\033[0m" . PHP_EOL;
             exit;
         }
-
         $validNamespaces = [];
-
         foreach ($namespaces as $item) {
             $separated = explode('\\', $item);
             $class = end($separated);
@@ -30,6 +28,7 @@ class ShortNamespace extends CommandAbstract
         }
         print_r($validNamespaces);
         // change with short form
+
         // replace in file
         // done
     }

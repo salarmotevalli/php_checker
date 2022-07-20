@@ -7,6 +7,17 @@ class ImportedClass extends AbstractFile
     public function allImports(): false|array
     {
         $this->openFileForRead();
+        $namespaces = $this->fetchAllNamespaces();
+        $this->closeFile();
+        if (empty($namespaces)) {
+            return false;
+        }
+
+        return $namespaces;
+    }
+
+    private function fetchAllNamespaces(): array
+    {
         while (! \feof($this->opened_file)) {
             $line = \fgets($this->opened_file);
             if (\is_bool($line)) {
@@ -17,10 +28,6 @@ class ImportedClass extends AbstractFile
             if (isset($matches[0])) {
                 $namespaces[] = $matches[0];
             }
-        }
-        $this->closeFile();
-        if (empty($namespaces)) {
-            return false;
         }
 
         return $namespaces;
