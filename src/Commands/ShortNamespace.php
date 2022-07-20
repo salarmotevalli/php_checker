@@ -26,7 +26,7 @@ class ShortNamespace extends CommandAbstract
             $namespace = implode('\\', $separated);
             $validNamespaces[$namespace][] = $class;
         }
-        print_r($validNamespaces);
+        var_dump($file->content());
         // change with short form
 
         // replace in file
