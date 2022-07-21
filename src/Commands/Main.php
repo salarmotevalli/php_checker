@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Salarmotevalli\PhpChecker\Commands;
 
-use Salarmotevalli\PhpChecker\Implementation\CommandAbstract;
+use Salarmotevalli\PhpChecker\Implementation\AbstractCommand;
 
 require_once __DIR__ . '/../CommandRegister.php';
 
-final class Main extends CommandAbstract
+final class Main extends AbstractCommand
 {
     protected array $commands;
 

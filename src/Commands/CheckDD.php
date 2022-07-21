@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Salarmotevalli\PhpChecker\Commands;
 
-use Salarmotevalli\PhpChecker\Implementation\CommandAbstract;
+use Salarmotevalli\PhpChecker\Implementation\AbstractCommand;
 
-final class CheckDD extends CommandAbstract
+final class CheckDD extends AbstractCommand
 {
     public static function description(): string
     {

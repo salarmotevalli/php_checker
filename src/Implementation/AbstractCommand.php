@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Salarmotevalli\PhpChecker\Implementation;
 
-abstract class CommandAbstract implements CommandInterface
+abstract class AbstractCommand implements CommandInterface
 {
     final public function run(): void
     {

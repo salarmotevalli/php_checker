@@ -3,9 +3,9 @@
 namespace Salarmotevalli\PhpChecker\Commands;
 
 use Salarmotevalli\PhpChecker\FileWorker\ImportedClass;
-use Salarmotevalli\PhpChecker\Implementation\CommandAbstract;
+use Salarmotevalli\PhpChecker\Implementation\AbstractCommand;
 
-class ShortNamespace extends CommandAbstract
+class ShortNamespace extends AbstractCommand
 {
     public function main()
     {

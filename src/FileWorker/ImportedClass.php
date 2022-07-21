@@ -16,7 +16,7 @@ class ImportedClass extends AbstractFile
         return $namespaces;
     }
 
-    private function fetchAllNamespaces(): array
+    private function fetchAllNamespaces(): array|null
     {
         while (! \feof($this->opened_file)) {
             $line = \fgets($this->opened_file);
@@ -30,6 +30,6 @@ class ImportedClass extends AbstractFile
             }
         }
 
-        return $namespaces;
+        return $namespaces ?? null;
     }
 }
