@@ -52,7 +52,7 @@ class ShortNamespace extends CommandAbstract
             $newContent = str_replace($declare, $declare . PHP_EOL . PHP_EOL . $validNamespaces, $contentWithouteNamespaces);
         }
 
-        var_dump($newContent);
+        $file->newContent($newContent);
 
         // change with short form
         // replace in file
