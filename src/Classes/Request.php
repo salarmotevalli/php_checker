@@ -29,7 +29,7 @@ final class Request
     public function getOptionKeyValue(): array
     {
         if ($this->argc > 1) {
-            $option = \explode(':', $this->getOption());
+             (array) $option = \explode(':', $this->getOption());
         }
 
         return [

@@ -34,7 +34,7 @@ abstract class AbstractFile
     public function content(): string
     {
         $this->openFileForRead();
-        $content = fread($this->opened_file, filesize($this->file_name));
+        (string) $content = fread($this->opened_file, filesize($this->file_name));
         $this->closeFile();
 
         return $content;
