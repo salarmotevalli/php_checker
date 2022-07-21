@@ -47,19 +47,12 @@ abstract class AbstractFile
     public function newContent(string $newContent): void
     {
         if (is_writable($this->file_name)) {
-            // In our example we're opening $filename in append mode.
-            // The file pointer is at the bottom of the file hence
-            // that's where $somecontent will go when we fwrite() it.
-
             $this->openForUpdate();
-            // Write $somecontent to our opened file.
             if (fwrite($this->opened_file, $newContent) === false) {
                 echo "Cannot write to file ($this->file_name)";
                 exit;
             }
-
             echo "Success, wrote new content to file ($this->file_name)";
-
             $this->closeFile();
         } else {
             echo "The file {$this->file_name} is not writable";
