@@ -5,8 +5,13 @@ namespace Salarmotevalli\PhpChecker\Commands;
 use Salarmotevalli\PhpChecker\FileWorker\ImportedClass;
 use Salarmotevalli\PhpChecker\Implementation\AbstractCommand;
 
-class ShortNamespace extends AbstractCommand
+final class ShortNamespace extends AbstractCommand
 {
+    public static function description(): string
+    {
+        return 'short namespaces as much as it can be';
+    }
+
     public function main()
     {
         (object) $file = new ImportedClass('read.php');
@@ -17,20 +22,12 @@ class ShortNamespace extends AbstractCommand
         }
         $validNamespacesArray = $this->getValidNamespacesArray($prevNamespaces);
         $prevContent = $file->content();
-        $contentWithouteNamespaces = $this->getContentWithoutNamespace($prevContent, $prevNamespaces);
+        $contentWithoutNamespaces = $this->getContentWithoutNamespace($prevContent, $prevNamespaces);
         $validNamespaces = $this->stringifyValidNamespacesArray($validNamespacesArray);
         $declare = 'declare(strict_types=1);';
-        if (str_contains($contentWithouteNamespaces, $declare)) {
-            $newContent = str_replace($declare, $declare . PHP_EOL . PHP_EOL . $validNamespaces, $contentWithouteNamespaces);
-        } else {
-            $newContent = str_replace('<?php', '<?php' . PHP_EOL . PHP_EOL . $validNamespaces, $contentWithouteNamespaces);
-        }
+        $replaceKey = str_contains($contentWithoutNamespaces, $declare) ? $declare : '<?php';
+        $newContent = str_replace($replaceKey, $replaceKey . PHP_EOL . PHP_EOL . $validNamespaces, $contentWithoutNamespaces);
         $file->newContent($newContent);
-    }
-
-    public static function description(): string
-    {
-        return 'short namespaces as much as it can be';
     }
 
     private function getValidNamespacesArray(array $prevNamespaces): array
@@ -51,7 +48,7 @@ class ShortNamespace extends AbstractCommand
     {
         $contentWithouteNamespaces = $prevContent;
         foreach ($prevNamespaces as $name) {
-            (string) $fullLineNamespace = 'use' . ' ' . $name . ';';
+            (string) $fullLineNamespace = 'use' . ' ' . $name . ';' .PHP_EOL;
             $contentWithouteNamespaces = str_replace($fullLineNamespace, '', $contentWithouteNamespaces);
         }
 
@@ -69,6 +66,7 @@ class ShortNamespace extends AbstractCommand
             }
             $validNamespaces .= 'use' . ' ' . $name . '\\' . $implodeClasses . ';' . PHP_EOL;
         }
+
         return $validNamespaces;
     }
 }
