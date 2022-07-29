@@ -24,9 +24,7 @@ final class ShortNamespace extends AbstractCommand
         $prevContent = $file->content();
         $contentWithoutNamespaces = $this->getContentWithoutNamespace($prevContent, $prevNamespaces);
         $validNamespaces = $this->stringifyValidNamespacesArray($validNamespacesArray);
-        $declare = 'declare(strict_types=1);';
-        $replaceKey = str_contains($contentWithoutNamespaces, $declare) ? $declare : '<?php';
-        $newContent = str_replace($replaceKey, $replaceKey . PHP_EOL . PHP_EOL . $validNamespaces, $contentWithoutNamespaces);
+        $newContent = $this->getNewContent($contentWithoutNamespaces, $validNamespaces);
         $file->newContent($newContent);
     }
 
@@ -46,13 +44,13 @@ final class ShortNamespace extends AbstractCommand
 
     private function getContentWithoutNamespace(string $prevContent, array $prevNamespaces): string
     {
-        $contentWithouteNamespaces = $prevContent;
+        $contentWithoutNamespaces = $prevContent;
         foreach ($prevNamespaces as $name) {
-            (string) $fullLineNamespace = 'use' . ' ' . $name . ';' .PHP_EOL;
-            $contentWithouteNamespaces = str_replace($fullLineNamespace, '', $contentWithouteNamespaces);
+            $fullLineNamespace = 'use' . ' ' . $name . ';' . PHP_EOL;
+            $contentWithoutNamespaces = str_replace($fullLineNamespace, '', $contentWithoutNamespaces);
         }
 
-        return $contentWithouteNamespaces;
+        return $contentWithoutNamespaces;
     }
 
     private function stringifyValidNamespacesArray(array $validNamespacesArray): string
@@ -68,5 +66,15 @@ final class ShortNamespace extends AbstractCommand
         }
 
         return $validNamespaces;
+    }
+
+    /**
+     * @return array|string|string[]
+     */
+    public function getNewContent(string $contentWithoutNamespaces, string $validNamespaces): string|array
+    {
+        $declare = 'declare(strict_types=1);';
+        $replaceKey = str_contains($contentWithoutNamespaces, $declare) ? $declare : '<?php';
+        return str_replace($replaceKey, $replaceKey . PHP_EOL . PHP_EOL . $validNamespaces, $contentWithoutNamespaces);
     }
 }
