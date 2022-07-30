@@ -17,16 +17,18 @@ final class ShortNamespace extends AbstractCommand
     {
         (object) $file = new File('read.php');
         $file->openFileForRead();
-        $prevNamespaces = ImportedClass::allImports($file->opened_file);
-        if (! $prevNamespaces) {
-            echo "\033[31m**/\033[0m there is not any namespace of classes in the file \033[31m/**\033[0m" . PHP_EOL;
-            exit;
-        }
-        $validNamespacesArray = $this->getValidNamespacesArray($prevNamespaces);
-        $contentWithoutNamespaces = $this->getContentWithoutNamespace($file->content(), $prevNamespaces);
-        $validNamespaces = $this->stringifyValidNamespacesArray($validNamespacesArray);
-        $newContent = $this->getNewContent($contentWithoutNamespaces, $validNamespaces);
-        $file->newContent($newContent);
+        $prevNamespaces = ImportedClass::allImports($file);
+        var_dump($prevNamespaces);
+//        if (! $prevNamespaces) {
+//            echo "\033[31m**/\033[0m there is not any namespace of classes in the file \033[31m/**\033[0m" . PHP_EOL;
+//            exit;
+//        }
+//        $validNamespacesArray = $this->getValidNamespacesArray($prevNamespaces);
+//        $contentWithoutNamespaces = $this->getContentWithoutNamespace($file->content(), $prevNamespaces);
+//        $validNamespaces = $this->stringifyValidNamespacesArray($validNamespacesArray);
+//        $newContent = $this->getNewContent($contentWithoutNamespaces, $validNamespaces);
+//        $file->newContent($newContent);
+        echo "khare";
     }
 
     private function getValidNamespacesArray(array $prevNamespaces): array

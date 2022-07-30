@@ -14,18 +14,17 @@ class ImportedClass
         return $namespaces;
     }
 
+    public function useImports(): array|null
+    {
+
+    }
+
     private static function fetchAllNamespaces($file): array|null
     {
-        while (! \feof($file)) {
-            $line = \fgets($file);
-            if (\is_bool($line)) {
-                continue;
-            }
-            $pattern = '/(?:\\\\{1,2}\w+|\w+\\\\{1,2})(?:\w+\\\\{0,2})+/m';
-            preg_match($pattern, $line, $matches);
-            if (isset($matches[0])) {
-                $namespaces[] = $matches[0];
-            }
+        $pattern = '/(?:\\\\{1,2}\w+|\w+\\\\{1,2})(?:\w+\\\\{0,2})+/m';
+        preg_match_all($pattern, $file->content(), $matches);
+        if (isset($matches[0])) {
+            $namespaces[] = $matches[0];
         }
 
         return $namespaces ?? null;
