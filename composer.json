@@ -24,7 +24,7 @@
         }
     ],
     "bin": [
-        "bin/check.php"
+        "bin/do"
     ],
     "require-dev": {
         "phpunit/phpunit": "^9.5",

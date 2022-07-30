@@ -28,11 +28,11 @@ final class RequestTest extends TestCase
 
     public function testMethodsReturnValidValue(): void
     {
-        $argv = ['php bin/check.php', 'check.php:import'];
+        $argv = ['php bin/do', 'do:import'];
         $argc = \count($argv);
         $request1 = new Request($argc, $argv);
-        self::assertEquals('check.php:import', $request1->getOption());
-        self::assertEquals(['key' => 'check.php', 'value' => 'import'], $request1->getOptionKeyValue());
+        self::assertEquals('do:import', $request1->getOption());
+        self::assertEquals(['key' => 'do', 'value' => 'import'], $request1->getOptionKeyValue());
         self::assertEquals($argc, $request1->getCommandLength());
         self::assertStringNotContainsString(':', $request1->getOptionKeyValue()['key']);
         $this->assertStringNotContainsString(':', $request1->getOptionKeyValue()['value']);

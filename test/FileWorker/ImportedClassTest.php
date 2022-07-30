@@ -3,7 +3,7 @@
 namespace Test\FileWorker;
 
 use PHPUnit\Framework\TestCase;
-use Salarmotevalli\PhpChecker\FileWorker\ImportedClass;
+use Salarmotevalli\PhpChecker\FileWorker\Options\ImportedClass;
 
 class ImportedClassTest extends TestCase
 {
@@ -11,10 +11,10 @@ class ImportedClassTest extends TestCase
     {
         $file = new ImportedClass(__DIR__ . '/test.txt');
         $realResult = ['App\Model\User', 'App\Model\Company', 'App\Model\Comment', 'App\Controller\User', 'App\Http'];
-        $testResulte = $file->allImports();
-        $this->assertEquals($realResult, $testResulte);
-        $this->assertStringNotContainsString('use', $testResulte[0]);
-        $this->assertStringNotContainsString(';', $testResulte[0]);
-        $this->assertStringNotContainsString(' ', $testResulte[0]);
+        $testResult = $file->allImports();
+        $this->assertEquals($realResult, $testResult);
+        $this->assertStringNotContainsString('use', $testResult[0]);
+        $this->assertStringNotContainsString(';', $testResult[0]);
+        $this->assertStringNotContainsString(' ', $testResult[0]);
     }
 }

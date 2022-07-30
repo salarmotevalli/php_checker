@@ -2,18 +2,18 @@
 
 namespace Salarmotevalli\PhpChecker\FileWorker;
 
-abstract class AbstractFile
+class File
 {
     protected string $file_name;
 
-    protected mixed $opened_file;
+    public $opened_file;
 
     public function __construct($path)
     {
         $this->file_name = $path;
     }
 
-    protected function openFileForRead(): void
+    public function openFileForRead(): void
     {
         $this->opened_file = \fopen($this->file_name, 'rb');
     }

@@ -2,7 +2,8 @@
 
 namespace Salarmotevalli\PhpChecker\Commands;
 
-use Salarmotevalli\PhpChecker\FileWorker\ImportedClass;
+use Salarmotevalli\PhpChecker\FileWorker\File;
+use Salarmotevalli\PhpChecker\FileWorker\Options\ImportedClass;
 use Salarmotevalli\PhpChecker\Implementation\AbstractCommand;
 
 final class ShortNamespace extends AbstractCommand
@@ -14,15 +15,15 @@ final class ShortNamespace extends AbstractCommand
 
     public function main()
     {
-        (object) $file = new ImportedClass('read.php');
-        $prevNamespaces = $file->allImports();
+        (object) $file = new File('read.php');
+        $file->openFileForRead();
+        $prevNamespaces = ImportedClass::allImports($file->opened_file);
         if (! $prevNamespaces) {
             echo "\033[31m**/\033[0m there is not any namespace of classes in the file \033[31m/**\033[0m" . PHP_EOL;
             exit;
         }
         $validNamespacesArray = $this->getValidNamespacesArray($prevNamespaces);
-        $prevContent = $file->content();
-        $contentWithoutNamespaces = $this->getContentWithoutNamespace($prevContent, $prevNamespaces);
+        $contentWithoutNamespaces = $this->getContentWithoutNamespace($file->content(), $prevNamespaces);
         $validNamespaces = $this->stringifyValidNamespacesArray($validNamespacesArray);
         $newContent = $this->getNewContent($contentWithoutNamespaces, $validNamespaces);
         $file->newContent($newContent);
@@ -30,12 +31,12 @@ final class ShortNamespace extends AbstractCommand
 
     private function getValidNamespacesArray(array $prevNamespaces): array
     {
-        (array) $validNamespacesArray = [];
+        $validNamespacesArray = [];
         foreach ($prevNamespaces as $item) {
-            (array) $separated = explode('\\', $item);
+            $separated = explode('\\', $item);
             (string) $class = end($separated);
             array_pop($separated);
-            (string) $namespace = implode('\\', $separated);
+            $namespace = implode('\\', $separated);
             $validNamespacesArray[$namespace][] = $class;
         }
 
@@ -55,7 +56,7 @@ final class ShortNamespace extends AbstractCommand
 
     private function stringifyValidNamespacesArray(array $validNamespacesArray): string
     {
-        (string) $validNamespaces = '';
+        $validNamespaces = '';
         foreach ($validNamespacesArray as $name => $class) {
             if (count($class) == 1) {
                 (string) $implodeClasses = $class[0];
@@ -75,6 +76,7 @@ final class ShortNamespace extends AbstractCommand
     {
         $declare = 'declare(strict_types=1);';
         $replaceKey = str_contains($contentWithoutNamespaces, $declare) ? $declare : '<?php';
+
         return str_replace($replaceKey, $replaceKey . PHP_EOL . PHP_EOL . $validNamespaces, $contentWithoutNamespaces);
     }
 }

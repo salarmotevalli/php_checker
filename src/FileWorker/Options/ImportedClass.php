@@ -1,14 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Salarmotevalli\PhpChecker\FileWorker;
+namespace Salarmotevalli\PhpChecker\FileWorker\Options;
 
-class ImportedClass extends AbstractFile
+class ImportedClass
 {
-    public function allImports(): false|array
+    public static function allImports($file): false|array
     {
-        $this->openFileForRead();
-        $namespaces = $this->fetchAllNamespaces();
-        $this->closeFile();
+        $namespaces = self::fetchAllNamespaces($file);
         if (empty($namespaces)) {
             return false;
         }
@@ -16,15 +14,15 @@ class ImportedClass extends AbstractFile
         return $namespaces;
     }
 
-    private function fetchAllNamespaces(): array|null
+    private static function fetchAllNamespaces($file): array|null
     {
-        while (! \feof($this->opened_file)) {
-            $line = \fgets($this->opened_file);
+        while (! \feof($file)) {
+            $line = \fgets($file);
             if (\is_bool($line)) {
                 continue;
             }
             $pattern = '/(?:\\\\{1,2}\w+|\w+\\\\{1,2})(?:\w+\\\\{0,2})+/m';
-            preg_match($pattern, $line, $matches, 0, 0);
+            preg_match($pattern, $line, $matches);
             if (isset($matches[0])) {
                 $namespaces[] = $matches[0];
             }
