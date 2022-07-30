@@ -6,7 +6,8 @@ class ImportedClass
 {
     public static function allImports($file): false|array
     {
-        $namespaces = self::fetchAllNamespaces($file);
+        $pattern = '/(?:\\\\{1,2}\w+|\w+\\\\{1,2})(?:\w+\\\\{0,2})+/m';
+        $namespaces = self::fetchByPattern($file, $pattern);
         if (empty($namespaces)) {
             return false;
         }
@@ -14,19 +15,20 @@ class ImportedClass
         return $namespaces;
     }
 
-    public function useImports(): array|null
-    {
-
-    }
-
-    private static function fetchAllNamespaces($file): array|null
+    public static function useImports($file): array|null
     {
         $pattern = '/(?:\\\\{1,2}\w+|\w+\\\\{1,2})(?:\w+\\\\{0,2})+/m';
-        preg_match_all($pattern, $file->content(), $matches);
-        if (isset($matches[0])) {
-            $namespaces[] = $matches[0];
+        $namespaces = self::fetchByPattern($file, $pattern);
+        if (empty($namespaces)) {
+            return false;
         }
 
-        return $namespaces ?? null;
+        return $namespaces;
+    }
+
+    private static function fetchByPattern($file, $pattern): array|null
+    {
+        preg_match_all($pattern, $file->content(), $matches);
+        return $matches ?? null;
     }
 }

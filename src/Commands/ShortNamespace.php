@@ -17,7 +17,7 @@ final class ShortNamespace extends AbstractCommand
     {
         (object) $file = new File('read.php');
         $file->openFileForRead();
-        $prevNamespaces = ImportedClass::allImports($file);
+        $prevNamespaces = ImportedClass::useImports($file);
         var_dump($prevNamespaces);
 //        if (! $prevNamespaces) {
 //            echo "\033[31m**/\033[0m there is not any namespace of classes in the file \033[31m/**\033[0m" . PHP_EOL;
