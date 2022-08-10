@@ -12,7 +12,7 @@ class ImportedClass
             return false;
         }
 
-        return $namespaces;
+        return $namespaces[0];
     }
 
     public static function useImports($file): array|false

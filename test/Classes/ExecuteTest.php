@@ -20,6 +20,4 @@ final class ExecuteTest extends TestCase
         self::assertTrue(\method_exists(Execute::class, 'getCommandClass'));
         self::assertTrue(\method_exists(Execute::class, 'execute'));
     }
-
-
 }

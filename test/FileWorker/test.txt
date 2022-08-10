@@ -11,5 +11,6 @@ class hello
     public function check(): void
     {
         var_dump(true);
+        return new App\Do\User;
     }
 }

@@ -15,10 +15,9 @@ final class ShortNamespace extends AbstractCommand
 
     public function main()
     {
-        (object) $file = new File('read.php');
+        (object) $file = new File('vendor/symfony/filesystem/Filesystem.php');
         $file->openFileForRead();
-        $prevNamespaces = ImportedClass::allImports($file);
-        var_dump($prevNamespaces);
+        $prevNamespaces = ImportedClass::useImports($file);
         if (! $prevNamespaces) {
             echo "\033[31m**/\033[0m there is not any namespace of classes in the file \033[31m/**\033[0m" . PHP_EOL;
             exit;
@@ -28,7 +27,6 @@ final class ShortNamespace extends AbstractCommand
         $validNamespaces = $this->stringifyValidNamespacesArray($validNamespacesArray);
         $newContent = $this->getNewContent($contentWithoutNamespaces, $validNamespaces);
         $file->newContent($newContent);
-
     }
 
     private function getValidNamespacesArray(array $prevNamespaces): array
@@ -61,7 +59,7 @@ final class ShortNamespace extends AbstractCommand
         $validNamespaces = '';
         foreach ($validNamespacesArray as $name => $class) {
             if (count($class) == 1) {
-                (string) $implodeClasses = $class[0];
+                $implodeClasses = $class[0];
             } else {
                 $implodeClasses = '{' . implode(', ', $class) . '}';
             }
@@ -76,9 +74,33 @@ final class ShortNamespace extends AbstractCommand
      */
     public function getNewContent(string $contentWithoutNamespaces, string $validNamespaces): string|array
     {
+//        $replacement = $this->getReplacment();
         $declare = 'declare(strict_types=1);';
-        $replaceKey = str_contains($contentWithoutNamespaces, $declare) ? $declare : '<?php';
+        foreach ($this->replacments as $item) {
+            if (str_contains($contentWithoutNamespaces, $item)) {
+                $replaceKey = $item;
+                break;
+            }
+        }
+
+        $replaceKey = $replaceKey ?? '<?php';
 
         return str_replace($replaceKey, $replaceKey . PHP_EOL . PHP_EOL . $validNamespaces, $contentWithoutNamespaces);
     }
+
+    /**
+     * @param $namespaes
+     *
+     * @return array
+     */
+    public array $replacments = [
+        'declare(strict_types=1);',
+        'declare(strict_types = 1);',
+        'declare( strict_types= 1);',
+        'declare(strict_types=1 );',
+        'declare( strict_types=1 );',
+        'declare( strict_types =1 );',
+        'declare( strict_types= 1 );',
+        'declare( strict_types = 1 );',
+    ];
 }
