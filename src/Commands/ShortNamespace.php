@@ -3,6 +3,7 @@
 namespace Salarmotevalli\PhpChecker\Commands;
 
 use Salarmotevalli\PhpChecker\FileWorker\File;
+use Salarmotevalli\PhpChecker\FileWorker\Options\ClassNamespace;
 use Salarmotevalli\PhpChecker\FileWorker\Options\ImportedClass;
 use Salarmotevalli\PhpChecker\Implementation\AbstractCommand;
 
@@ -15,9 +16,11 @@ final class ShortNamespace extends AbstractCommand
 
     public function main()
     {
-        (object) $file = new File('vendor/symfony/filesystem/Filesystem.php');
+        $file = new File('./read.php');
         $file->openFileForRead();
         $prevNamespaces = ImportedClass::useImports($file);
+//        $namespace = ClassNamespace::getFullNamespace($file);
+//        exit(var_dump($namespace));
         if (! $prevNamespaces) {
             echo "\033[31m**/\033[0m there is not any namespace of classes in the file \033[31m/**\033[0m" . PHP_EOL;
             exit;
@@ -25,7 +28,8 @@ final class ShortNamespace extends AbstractCommand
         $validNamespacesArray = $this->getValidNamespacesArray($prevNamespaces);
         $contentWithoutNamespaces = $this->getContentWithoutNamespace($file->content(), $prevNamespaces);
         $validNamespaces = $this->stringifyValidNamespacesArray($validNamespacesArray);
-        $newContent = $this->getNewContent($contentWithoutNamespaces, $validNamespaces);
+        $newContent = $this->getNewContent($contentWithoutNamespaces, $validNamespaces, $file);
+        $file->newContent($newContent);
         $file->newContent($newContent);
     }
 
@@ -72,20 +76,22 @@ final class ShortNamespace extends AbstractCommand
     /**
      * @return array|string|string[]
      */
-    public function getNewContent(string $contentWithoutNamespaces, string $validNamespaces): string|array
+    private function getNewContent(string $contentWithoutNamespaces, string $validNamespaces, $file): string
     {
-//        $replacement = $this->getReplacment();
-        $declare = 'declare(strict_types=1);';
+        $namespace = ClassNamespace::getFullNamespace();
+        if (ClassNamespace::isThereNamespace($file)) {
+            return str_replace($namespace, $namespace . PHP_EOL . PHP_EOL . $validNamespaces, $contentWithoutNamespaces);
+        }
+
         foreach ($this->replacments as $item) {
             if (str_contains($contentWithoutNamespaces, $item)) {
                 $replaceKey = $item;
                 break;
             }
         }
-
         $replaceKey = $replaceKey ?? '<?php';
-
         return str_replace($replaceKey, $replaceKey . PHP_EOL . PHP_EOL . $validNamespaces, $contentWithoutNamespaces);
+
     }
 
     /**
@@ -93,7 +99,7 @@ final class ShortNamespace extends AbstractCommand
      *
      * @return array
      */
-    public array $replacments = [
+    private array $replacments = [
         'declare(strict_types=1);',
         'declare(strict_types = 1);',
         'declare( strict_types= 1);',
