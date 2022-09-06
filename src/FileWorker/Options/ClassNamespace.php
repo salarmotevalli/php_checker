@@ -29,6 +29,7 @@ class ClassNamespace
         if (! self::getFullNamespace($file)) {
             return false;
         }
+
         return true;
     }
 }
